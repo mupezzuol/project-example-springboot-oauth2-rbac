@@ -1,0 +1,96 @@
+spring:
+  profiles.active: develop
+
+# Environment - Development
+---
+spring:
+  profiles: develop
+  application:
+    name: vetweb-api
+        
+  datasource:
+    name: DB Develop
+    url: jdbc:postgresql://localhost:5432/vetweb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    platform: 
+    hikari:
+        connection-timeout: 20000
+        maximum-pool-size: 5
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: false
+        format_sql: true
+        ddl-auto: update 
+        temp.use_jdbc_metadata_defaults: false
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    generate-ddl: true
+    
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+vetweb:
+  jwt:
+    secret: A+X;fffTJP&Pd,TD9fdfdwVq(hsHX,ya^df<wsD_UK7L+@=S;{HsdgwgydP]{v@}G'b>et;yz$*5235235EJN:%P:X%H9>#nYLrX}@?CQcpspH,2emzBc!Q[V'AYa~uzF8WR~AUrMzxp/V$9([S9X#zj/CH('#]B_Hc+%%6&dsff;134v;^j4k=Ju"Ap~_&<L;=!Z;!,2UP;!hF3P]j85#*`&T]/kB/W^6$v~u6qpejL>kY^f)sy4:qTq_Ec!-z!@fdaAp~sLKGU>$
+    expiration: 86400000
+    prefix: Bearer
+    header: Authorization
+    
+server:
+  address: localhost
+  port: 8080
+  servlet:
+    context-path: /api
+
+
+
+
+
+
+
+
+
+
+# Environment - Homolog
+---
+spring:
+  profiles: homolog
+  application:
+    name: vetweb-api
+server:
+  address: 192.168.1.2
+  port: 8080
+
+ 
+ 
+
+
+
+
+
+
+
+# Environment - Production
+---
+spring:
+  profiles: prod
+  application:
+    name: vetweb-api
+server:
+  address: 192.168.1.3
+  port: 8080
+
+
+
+
+  
+  
