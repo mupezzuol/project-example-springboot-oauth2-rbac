@@ -8,23 +8,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.oauth2.entities.User;
 
-
 public class UserPrincipal implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	
 	private final User user;
 	
-    private final Collection<? extends GrantedAuthority> authorities;
-	
-	
 	public UserPrincipal(User user) {
         this.user = user;
-        String[] permissions = user.getRoles().stream()
-                .flatMap(role -> role.getPermissions().stream())
-                .map(permission -> permission.getName())
-                .toArray(String[]::new);
-        this.authorities = AuthorityUtils.createAuthorityList(permissions);
     }
 	
 	
@@ -34,7 +25,11 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+    	String[] permissions = user.getRoles().stream()
+                .flatMap(role -> role.getPermissions().stream())
+                .map(permission -> permission.getName())
+                .toArray(String[]::new);
+        return AuthorityUtils.createAuthorityList(permissions);
     }
 
     @Override

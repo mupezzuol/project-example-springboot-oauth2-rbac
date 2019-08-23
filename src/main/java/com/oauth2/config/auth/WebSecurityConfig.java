@@ -16,10 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
-@Configuration
-@EnableWebSecurity
-@EnableAuthorizationServer
-@EnableResourceServer
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -56,25 +53,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return passwordEncoder;
 	}
 	
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-    	http
-			.httpBasic().disable()
-			.csrf().disable()
-			.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and()
-				.authorizeRequests()
-				.anyRequest()
-					.authenticated();       
-    }
-    
- 	@Override
- 	public void configure(WebSecurity web) throws Exception {
- 		web.ignoring()
- 			.antMatchers(HttpMethod.GET, "/")//Home Test
- 			.antMatchers(DOCS_INFRA_API);
- 	}
+//    @Override
+//    public void configure(HttpSecurity http) throws Exception {
+//    	http
+//			.httpBasic().disable()
+//			.csrf().disable()
+//			.sessionManagement()
+//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//			.and()
+//				.authorizeRequests()
+//				.anyRequest()
+//					.authenticated();       
+//    }
+//    
+// 	@Override
+// 	public void configure(WebSecurity web) throws Exception {
+// 		web.ignoring()
+// 			.antMatchers(HttpMethod.GET, "/")//Home Test
+// 			.antMatchers(DOCS_INFRA_API);
+// 	}
     
 	
 }

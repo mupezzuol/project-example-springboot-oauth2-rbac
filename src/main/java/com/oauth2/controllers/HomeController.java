@@ -44,13 +44,12 @@ public class HomeController {
 	}
 	
 
-	
-	//@PreAuthorize("hasAuthority('user_delete')")
-	
-	//@PreAuthorize("hasRole('ADMIN')")
-	@PreAuthorize("hasAnyAuthority('user_delete')")
+	@PreAuthorize("hasAuthority('user_delete')")
 	@DeleteMapping("/user")
 	public ResponseEntity<String> update(){
+		
+		System.out.print("ESTOU DENTRO DO MÉTODO");
+		
 		return null;
 	}
 

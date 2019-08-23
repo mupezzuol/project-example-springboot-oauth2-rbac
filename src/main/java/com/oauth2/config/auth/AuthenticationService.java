@@ -23,7 +23,6 @@ public class AuthenticationService implements UserDetailsService{
 		
 		UserPrincipal aaa = new UserPrincipal(user);
 		
-		// Return the contained value, if present, otherwise throw an exception
 		return new UserPrincipal(user);
 	}
 

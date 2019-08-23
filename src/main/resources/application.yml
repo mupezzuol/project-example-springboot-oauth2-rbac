@@ -38,15 +38,7 @@ management:
       exposure:
         include: "*"
 
-security:
-  oauth2:
-    client:
-      clientId: ProjectExampleOAuth2Security
-      clientSecret: secretProjectExampleOAuth2Security
-      accessTokenUri: http://localhost:8080/api/oauth/token
-      userAuthorizationUri: http://localhost:8080/api/oauth/authorize
-      scope:
-      - password
+
 
 server:
   address: localhost
@@ -79,6 +71,15 @@ server:
   address: 192.168.1.2
   port: 8080
 
+security:
+  oauth2:
+    client:
+      clientId: ProjectExampleOAuth2Security
+      clientSecret: secretProjectExampleOAuth2Security
+      accessTokenUri: http://localhost:8080/api/oauth/token
+      userAuthorizationUri: http://localhost:8080/api/oauth/authorize
+      scope:
+      - password
  
  
 
