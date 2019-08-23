@@ -3,6 +3,9 @@ package com.oauth2.controllers;
 import java.util.HashMap;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +26,6 @@ public class HomeController {
 		return "Hello World - Welcome API REST";
 	}
 	
-	
 	@ApiOperation(value = "Test List String")
 	@GetMapping("/list")
 	public ResponseEntity<HashMap<String, String>> testList() {
@@ -34,5 +36,23 @@ public class HomeController {
 		return ResponseEntity.ok(values);
 	}
 	
+	
+	@Secured("user_create")
+	//@PreAuthorize('hasRole()')
+	public ResponseEntity<String> create(){
+		return null;
+	}
+	
+
+	
+	//@PreAuthorize("hasAuthority('user_delete')")
+	
+	//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAnyAuthority('user_delete')")
+	@DeleteMapping("/user")
+	public ResponseEntity<String> update(){
+		return null;
+	}
+
 	
 }
