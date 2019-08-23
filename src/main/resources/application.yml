@@ -38,18 +38,27 @@ management:
       exposure:
         include: "*"
 
-vetweb:
-  jwt:
-    secret: A+X;fffTJP&Pd,TD9fdfdwVq(hsHX,ya^df<wsD_UK7L+@=S;{HsdgwgydP]{v@}G'b>et;yz$*5235235EJN:%P:X%H9>#nYLrX}@?CQcpspH,2emzBc!Q[V'AYa~uzF8WR~AUrMzxp/V$9([S9X#zj/CH('#]B_Hc+%%6&dsff;134v;^j4k=Ju"Ap~_&<L;=!Z;!,2UP;!hF3P]j85#*`&T]/kB/W^6$v~u6qpejL>kY^f)sy4:qTq_Ec!-z!@fdaAp~sLKGU>$
-    expiration: 86400000
-    prefix: Bearer
-    header: Authorization
-    
+security:
+  oauth2:
+    client:
+      clientId: ProjectExampleOAuth2Security
+      clientSecret: secretProjectExampleOAuth2Security
+      accessTokenUri: http://localhost:8080/api/oauth/token
+      userAuthorizationUri: http://localhost:8080/api/oauth/authorize
+      scope:
+      - password
+
 server:
   address: localhost
   port: 8080
   servlet:
     context-path: /api
+
+
+
+
+
+
 
 
 
