@@ -6,6 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,8 +24,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private AuthenticationService authenticationService;
 	
 	private static final String[] DOCS_INFRA_API = {
-            "/swagger-resources/**", "//swagger-resources/configuration/**", "/swagger-ui.html", "/swagger-ui.html/**",
-            "/v2/api-docs", "/webjars/**", "/actuator/**" };
+            "/swagger-resources/**", 
+            "//swagger-resources/configuration/**", 
+            "/swagger-ui.html", 
+            "/swagger-ui.html/**",
+            "/v2/api-docs", 
+            "/webjars/**", 
+            "/actuator/**",
+            "/**.html",
+            "/configuration/**"};
 	
 	
 	@Bean
@@ -55,11 +63,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 				.authorizeRequests()
-					.antMatchers(HttpMethod.GET, "/").permitAll()//Home Test
-	        		.antMatchers(DOCS_INFRA_API).permitAll()
 				.anyRequest()
 					.authenticated();       
     }
+    
+ 	@Override
+ 	public void configure(WebSecurity web) throws Exception {
+ 		web.ignoring()
+ 			.antMatchers(HttpMethod.GET, "/")//Home Test
+ 			.antMatchers(DOCS_INFRA_API);
+ 	}
     
 	
 }
