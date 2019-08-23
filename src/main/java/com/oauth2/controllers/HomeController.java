@@ -4,18 +4,20 @@ import java.util.HashMap;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags="Welcome - Get Started - Home", description="Test Request")
+@RequestMapping("/")
+@Api(tags="Home - Test", description="Test Request")
 @RestController
 public class HomeController {
-
 	
-	@GetMapping("/")
+	
+	@GetMapping()
 	@ResponseBody
 	public String home() {
 		return "Hello World - Welcome API REST";
