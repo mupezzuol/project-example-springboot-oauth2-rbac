@@ -21,8 +21,6 @@ public class AuthenticationService implements UserDetailsService{
 				.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not founded"));
 		
-		UserPrincipal aaa = new UserPrincipal(user);
-		
 		return new UserPrincipal(user);
 	}
 

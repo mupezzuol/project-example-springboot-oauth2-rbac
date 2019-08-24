@@ -29,10 +29,23 @@ public class UserPrincipal implements UserDetails {
                 .flatMap(role -> role.getPermissions().stream())
                 .map(permission -> permission.getName())
                 .toArray(String[]::new);
+    	
+    	//String[] oi = vortarA();
         return AuthorityUtils.createAuthorityList(permissions);
     }
 
-    @Override
+    //TESTEEEEE PRO TAMANHO DO TOKEEEN 
+    private String[] vortarA() {
+    	String [] permm = new String[300];
+    	permm[0] = "user_delete";
+    	for (int i = 1; i < 300; i++) {
+    		permm[i] = "ab"+i;
+		}
+		return permm;
+	}
+
+
+	@Override
     public String getPassword() {
         return user.getPassword();
     }

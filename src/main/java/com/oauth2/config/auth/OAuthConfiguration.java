@@ -22,20 +22,20 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 
     private final UserDetailsService userService;
 
-    @Value("${jwt.clientId:ProjectExampleOAuth2Security}")
+    @Value("${jwt.clientId}")
     private String clientId;
 
-    @Value("${jwt.client-secret:secretProjectExampleOAuth2Security}")
+    @Value("${jwt.client-secret}")
     private String clientSecret;
 
-    @Value("${jwt.accessTokenValidititySeconds:43200}") // 12 hours
-    private int accessTokenValiditySeconds;
+    @Value("${jwt.accessTokenValidititySeconds}")
+    private int accessTokenValiditySeconds;//12h
 
-    @Value("${jwt.authorizedGrantTypes:password,authorization_code,refresh_token}")
+    @Value("${jwt.authorizedGrantTypes}")
     private String[] authorizedGrantTypes;
 
-    @Value("${jwt.refreshTokenValiditySeconds:2592000}") // 30 days
-    private int refreshTokenValiditySeconds;
+    @Value("${jwt.refreshTokenValiditySeconds}")
+    private int refreshTokenValiditySeconds;//30days
 
     public OAuthConfiguration(AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserDetailsService userService) {
         this.authenticationManager = authenticationManager;

@@ -5,12 +5,19 @@
 //import org.springframework.security.access.PermissionEvaluator;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.stereotype.Component;
 //
+//@Component
 //public class CustomPermissionEvaluator implements PermissionEvaluator {
 //	
 //	
 //	@Override
 //	public boolean hasPermission(Authentication auth, Object targetDomainObject, Object permission) {
+//		
+//		
+//		System.out.print("ESTAMOOOOS DENTRO DA PERMISSAO 1");
+//		System.out.print(auth.toString());
+//		
 //		if ((auth == null) || (targetDomainObject == null) || !(permission instanceof String)) {
 //			return false;
 //		}
@@ -22,6 +29,11 @@
 //	
 //	@Override
 //	public boolean hasPermission(Authentication auth, Serializable targetId, String targetType, Object permission) {
+//		System.out.print("ESTAMOOOOS DENTRO DA PERMISSAO 1");
+//		System.out.print(auth.toString());
+//		
+//		
+//		
 //		if ((auth == null) || (targetType == null) || !(permission instanceof String)) {
 //			return false;
 //		}

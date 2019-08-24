@@ -38,7 +38,12 @@ management:
       exposure:
         include: "*"
 
-
+jwt:
+  clientId: ProjectExampleOAuth2Security
+  client-secret: secretProjectExampleOAuth2Security
+  accessTokenValidititySeconds: 43200
+  authorizedGrantTypes: password,authorization_code,refresh_token
+  refreshTokenValiditySeconds: 2592000
 
 server:
   address: localhost

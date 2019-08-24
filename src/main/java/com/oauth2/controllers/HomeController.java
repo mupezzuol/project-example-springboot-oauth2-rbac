@@ -3,7 +3,6 @@ package com.oauth2.controllers;
 import java.util.HashMap;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,20 +36,13 @@ public class HomeController {
 	}
 	
 	
-	@Secured("user_create")
-	//@PreAuthorize('hasRole()')
-	public ResponseEntity<String> create(){
-		return null;
-	}
-	
-
-	@PreAuthorize("hasAuthority('user_delete')")
+	@PreAuthorize("hasAnyAuthority('user_delete', 'user_update')")
 	@DeleteMapping("/user")
 	public ResponseEntity<String> update(){
 		
 		System.out.print("ESTOU DENTRO DO MÉTODO");
 		
-		return null;
+		return ResponseEntity.ok(new String("OK -> Permission OK"));
 	}
 
 	
