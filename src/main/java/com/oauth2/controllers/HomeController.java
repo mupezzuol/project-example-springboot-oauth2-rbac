@@ -35,13 +35,10 @@ public class HomeController {
 		return ResponseEntity.ok(values);
 	}
 	
-	
 	@PreAuthorize("hasAnyAuthority('user_delete', 'user_update')")
 	@DeleteMapping("/user")
 	public ResponseEntity<String> update(){
-		
 		System.out.print("ESTOU DENTRO DO MÉTODO");
-		
 		return ResponseEntity.ok(new String("OK -> Permission OK"));
 	}
 
