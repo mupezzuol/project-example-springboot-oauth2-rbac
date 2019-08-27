@@ -46,5 +46,6 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    
 
 }

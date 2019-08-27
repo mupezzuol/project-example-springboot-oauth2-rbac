@@ -2,6 +2,7 @@ package com.oauth2.entities;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,6 +35,7 @@ public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
+	private UUID uuid;
 	
 	@NotNull @NotEmpty
 	@Column(name = "name")

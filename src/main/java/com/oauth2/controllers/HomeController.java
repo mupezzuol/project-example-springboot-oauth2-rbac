@@ -25,6 +25,7 @@ public class HomeController {
 		return "Hello World - Welcome API REST";
 	}
 	
+	
 	@ApiOperation(value = "Test List String")
 	@GetMapping("/list")
 	public ResponseEntity<HashMap<String, String>> testList() {
@@ -34,13 +35,14 @@ public class HomeController {
 		values.put("Campo3", "Valor3");
 		return ResponseEntity.ok(values);
 	}
+
 	
-	@PreAuthorize("hasAnyAuthority('user_delete', 'user_update')")
+	@PreAuthorize("hasPermission(returnObject, {'user_read', 'user_update'})")
 	@DeleteMapping("/user")
 	public ResponseEntity<String> update(){
 		System.out.print("ESTOU DENTRO DO MÉTODO");
 		return ResponseEntity.ok(new String("OK -> Permission OK"));
 	}
-
+	
 	
 }
