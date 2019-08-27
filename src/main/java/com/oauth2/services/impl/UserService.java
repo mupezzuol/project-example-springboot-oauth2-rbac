@@ -2,6 +2,7 @@ package com.oauth2.services.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,15 @@ public class UserService implements IUserService {
 			return null;
 		}
 	}
+	
+	@Override
+	public Optional<User> findByUuid(String uuid) {
+		try {
+			return userRepository.findByUuid(uuid);
+		} catch (NoSuchElementException exception) {
+			return null;
+		}
+	}
+	
 
 }

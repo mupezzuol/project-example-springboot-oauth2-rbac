@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +36,10 @@ public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
+
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "uuid", updatable = false, nullable = false)
 	private UUID uuid;
 	
 	@NotNull @NotEmpty
@@ -68,7 +73,6 @@ public class User {
 		this.password = password;
 		//this.profiles = profiles;
 	}
-	
 
 	
 }

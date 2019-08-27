@@ -1,21 +1,28 @@
-package com.oauth2.config.auth;
+package com.oauth2.config.auth.custom;
+
+import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 
-import com.oauth2.config.auth.custom.CustomPermissionEvaluator;
-
+@Import({CustomPermissionEvaluator.class})
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ConfigTestePermission extends GlobalMethodSecurityConfiguration{
+public class MethodSecurityExpressionHandlerCustomPermission extends GlobalMethodSecurityConfiguration{
 
+	@Bean
+	public CustomPermissionEvaluator customPermissionEvaluator() {
+		return new CustomPermissionEvaluator();
+	}
+	
 	@Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
         DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
-        expressionHandler.setPermissionEvaluator(new CustomPermissionEvaluator());
+        expressionHandler.setPermissionEvaluator(customPermissionEvaluator());
         return expressionHandler;
     }
 	
