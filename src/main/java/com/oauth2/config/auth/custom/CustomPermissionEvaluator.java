@@ -24,7 +24,9 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	@Autowired
 	private IPermissionRepository permissionRepository;
 
-	// @PreAuthorize("hasPermission(returnObject, {'user_read', 'user_update'})")
+	
+	//OR -> @PreAuthorize("hasPermission(returnObject, {'user_create', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
+	//AND -> @PreAuthorize("hasPermission(returnObject, {'user_read'}) AND hasPermission(returnObject, {'user_update'})")
 	@Override
 	public boolean hasPermission(Authentication auth, Object targetDomainObject, Object permission) {
 		
@@ -65,7 +67,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	}
 
 	
-	// @PreAuthorize("hasPermission(#id, 'Foo', 'read')")
+	//@PreAuthorize("hasPermission(#id, 'Foo', 'read')")
 	@Override
 	public boolean hasPermission(Authentication auth, Serializable targetId, String targetType, Object permission) {
 		return true;
