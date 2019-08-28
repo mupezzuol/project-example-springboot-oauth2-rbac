@@ -37,7 +37,7 @@ public class HomeController {
 	}
 
 	
-	@PreAuthorize("hasPermission(returnObject, {'user_read', 'user_update'})")
+	@PreAuthorize("hasPermission(returnObject, {'user_create', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
 	@DeleteMapping("/user")
 	public ResponseEntity<String> update(){
 		System.out.print("ESTOU DENTRO DO MÉTODO");
