@@ -20,7 +20,6 @@ public class AuthenticationService implements UserDetailsService{
 		User user = userRepository
 				.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not founded"));
-		
 		return new UserPrincipal(user);
 	}
 

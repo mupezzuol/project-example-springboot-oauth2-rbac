@@ -26,5 +26,4 @@ public class MethodSecurityExpressionHandlerCustomPermission extends GlobalMetho
         return expressionHandler;
     }
 	
-	
 }

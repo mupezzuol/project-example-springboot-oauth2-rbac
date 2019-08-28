@@ -29,7 +29,6 @@ public class UserService implements IUserService {
 		this.userRepository.save(user);
 		return user;
 	}
-
 	
 	public User findByName(String userName) {
 		try {
