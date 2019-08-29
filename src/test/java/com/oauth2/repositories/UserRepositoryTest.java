@@ -1,11 +1,12 @@
 package com.oauth2.repositories;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -29,7 +30,6 @@ public class UserRepositoryTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
-	
 	@Test
 	public void createShouldPersistData() {
 		String password = new BCryptPasswordEncoder().encode("1234");
@@ -41,13 +41,50 @@ public class UserRepositoryTest {
 		this.userRepository.save(user);
 		
 		//Tests
-		Assertions.assertThat(user.getUserId()).isNotNull();
-		Assertions.assertThat(user.getUuid()).isNotNull();
-		Assertions.assertThat(user.getName()).isEqualTo("Gildo");
-		Assertions.assertThat(user.getEmail()).isEqualTo("gildo@gmail.com");
-		Assertions.assertThat(user.getPassword()).isEqualTo(password);
-		Assertions.assertThat(user.getRoles()).isEqualTo(roles);
-		Assertions.assertThat(user.getInclusionDate()).isEqualTo(dtInclussion);
+		assertThat(user.getUserId()).isNotNull();
+		assertThat(user.getUuid()).isNotNull();
+		assertThat(user.getName()).isEqualTo("Gildo");
+		assertThat(user.getEmail()).isEqualTo("gildo@gmail.com");
+		assertThat(user.getPassword()).isEqualTo(password);
+		assertThat(user.getRoles()).isEqualTo(roles);
+		assertThat(user.getInclusionDate()).isEqualTo(dtInclussion);
+	}
+	
+	@Test
+	public void deleteShouldRemoveData() {
+		String password = new BCryptPasswordEncoder().encode("1234");
+		Set<Role> roles = createRolesAndPermissionsMock();
+		LocalDate dtInclussion = LocalDate.now();
+		
+		User user = createUserMock(password, roles, dtInclussion);
+				
+		this.userRepository.save(user);
+		this.userRepository.delete(user);
+		
+		//Tests
+		assertThat(userRepository.findById(user.getUserId())).isEmpty();
+	}
+	
+	
+	
+	@Test
+	public void updateShouldChangeAndPersistData() {
+		String password = new BCryptPasswordEncoder().encode("1234");
+		Set<Role> roles = createRolesAndPermissionsMock();
+		LocalDate dtInclussion = LocalDate.now();
+		
+		User user = createUserMock(password, roles, dtInclussion);
+				
+		this.userRepository.save(user);
+		
+		user.setName("Murillo Pezzuol");
+		user.setEmail("murillopezzuol@hotmail.com");
+		
+		this.userRepository.save(user);
+		
+		//Tests
+		assertThat(user.getName()).isEqualTo("Murillo Pezzuol");
+		assertThat(user.getEmail()).isEqualTo("murillopezzuol@hotmail.com");
 	}
 	
 	
