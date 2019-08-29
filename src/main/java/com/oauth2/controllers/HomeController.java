@@ -49,7 +49,7 @@ public class HomeController {
 	@PreAuthorize("hasPermission(returnObject, {'user_create', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
 	@DeleteMapping("/user")
 	public ResponseEntity<String> update(){
-		System.out.print("ESTOU DENTRO DO MÉTODO");
+		System.out.print("I'm in the method!");
 		return ResponseEntity.ok(new String("OK -> Permission OK"));
 	}
 	
