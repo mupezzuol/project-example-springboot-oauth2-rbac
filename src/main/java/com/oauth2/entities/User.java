@@ -66,12 +66,14 @@ public class User {
 	
 
 	//Constructor's
-	public User(String name, String email, String password, Set<Role> profiles) {
+	public User(UUID uuid, String name, String email, String password, Set<Role> roles, LocalDate inclusionDate) {
 		super();
+		this.uuid = uuid;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		//this.profiles = profiles;
+		this.roles = roles;
+		this.inclusionDate = inclusionDate;
 	}
 
 	

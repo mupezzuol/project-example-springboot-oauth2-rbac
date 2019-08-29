@@ -53,4 +53,8 @@ public class Permission {
                 || (anotherPermission.permissionId == null && anotherPermission.name != null && (anotherPermission.name.equals(this.name)));
     }
 
+	public Permission(String name) {
+		this.name = name;
+	}
+
 }

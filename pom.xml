@@ -99,6 +99,13 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<!-- Spring - Test - H2 - Database -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
 		<!-- Spring - Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
