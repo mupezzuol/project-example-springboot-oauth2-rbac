@@ -56,25 +56,14 @@ public class SwaggerConfiguration {
 	
 	
 	//Method that returns templates that will be hidden in the API documentation
+	@SuppressWarnings("rawtypes")
 	private Class[] disableTemplateClassesModels(){
-		ArrayList<Class> modelsForDisable = new ArrayList<Class>();
+		ArrayList<Class> classForDisable = new ArrayList<Class>();
 		
-		//Entities
-		//modelsForDisable.add(Role.class);
-		modelsForDisable.add(User.class);
+		//Entities - Models - DTO and others....
+		classForDisable.add(User.class);
 		
-		//Models DTO
-		//modelsForDisable.add(TokenDTO.class);//Token
-		//modelsForDisable.add(ClinicCreateDTO.class);
-		//modelsForDisable.add(UserCreateDTO.class);
-		
-		//Models Form
-		//modelsForDisable.add(LoginForm.class);//LoginForm
-		//modelsForDisable.add(ClinicCreateForm.class);
-		//modelsForDisable.add(UserCreateForm.class);
-		
-		return modelsForDisable.toArray(new Class[modelsForDisable.size()]);
+		return classForDisable.toArray(new Class[classForDisable.size()]);
 	}
-	
 	
 }

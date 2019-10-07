@@ -1,24 +1,32 @@
 package com.oauth2.controllers;
 
-import java.util.HashMap;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.oauth2.entities.User;
+import com.oauth2.models.dto.UserRoleAndAuthoritiesDTO;
+import com.oauth2.services.IUserService;
+
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/")
 @Api(tags="Home - Test", description="Test Request")
 @RestController
-@Slf4j
 public class HomeController {
+	
+	@Autowired
+	private IUserService userService;
 	
 	@GetMapping()
 	@ResponseBody
@@ -26,26 +34,26 @@ public class HomeController {
 		return "Hello World - Welcome API REST";
 	}
 	
-	
-	@ApiOperation(value = "Test List String")
-	@GetMapping("/list")
-	public ResponseEntity<HashMap<String, String>> testList() {
+	@GetMapping(value = "authorities/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserRoleAndAuthoritiesDTO> getAuthorities(@PathVariable String uuid){
 		
-		//Test using '@Slf4j' for Lombok
-		log.trace("A TRACE Message");
-        log.debug("A DEBUG Message");
-        log.info("An INFO Message");
-        log.warn("A WARN Message");
-        log.error("An ERROR Message");
-        
-		HashMap<String, String> values = new HashMap<>();
-		values.put("Campo1", "Valor1");
-		values.put("Campo2", "Valor2");
-		values.put("Campo3", "Valor3");
-		return ResponseEntity.ok(values);
+		try {
+			UUID uuid_user = UUID.fromString(uuid.toString());
+			
+			User user = userService.findByUuid(uuid_user)
+					.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuid_user));
+			
+			UserRoleAndAuthoritiesDTO dto = new UserRoleAndAuthoritiesDTO(user);
+			
+			return ResponseEntity.ok(dto);
+		} catch (Exception e) {
+			return null;
+		}
+		
+		
 	}
-
 	
+
 	@PreAuthorize("hasPermission(returnObject, {'user_create', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
 	@DeleteMapping("/user")
 	public ResponseEntity<String> update(){
