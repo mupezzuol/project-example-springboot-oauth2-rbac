@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oauth2.entities.User;
-import com.oauth2.models.dto.UserRoleAndAuthoritiesDTO;
+import com.oauth2.models.dto.auth.AuthUserRoleAndAuthoritiesDTO;
 import com.oauth2.services.IUserService;
 
 import io.swagger.annotations.Api;
@@ -35,7 +35,7 @@ public class HomeController {
 	}
 	
 	@GetMapping(value = "authorities/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserRoleAndAuthoritiesDTO> getAuthorities(@PathVariable String uuid){
+	public ResponseEntity<AuthUserRoleAndAuthoritiesDTO> getAuthorities(@PathVariable String uuid){
 		
 		try {
 			UUID uuid_user = UUID.fromString(uuid.toString());
@@ -43,7 +43,7 @@ public class HomeController {
 			User user = userService.findByUuid(uuid_user)
 					.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuid_user));
 			
-			UserRoleAndAuthoritiesDTO dto = new UserRoleAndAuthoritiesDTO(user);
+			AuthUserRoleAndAuthoritiesDTO dto = new AuthUserRoleAndAuthoritiesDTO(user);
 			
 			return ResponseEntity.ok(dto);
 		} catch (Exception e) {

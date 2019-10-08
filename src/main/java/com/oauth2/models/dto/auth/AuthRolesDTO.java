@@ -1,4 +1,4 @@
-package com.oauth2.models.dto;
+package com.oauth2.models.dto.auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RolesDTO {
+public class AuthRolesDTO {
 	
 	private String name;
-	private List<PermissionsDTO> permissions;
+	private List<AuthPermissionsDTO> permissions;
 	
-	public RolesDTO(Role role) {
+	public AuthRolesDTO(Role role) {
 		this.name = role.getName();
 		this.permissions = new ArrayList<>();
 		this.permissions.addAll(role.getPermissions().stream()
-				.map(PermissionsDTO::new)
+				.map(AuthPermissionsDTO::new)
 				.collect(Collectors.toList()));
 	}
 	

@@ -1,4 +1,4 @@
-package com.oauth2.models.dto;
+package com.oauth2.models.dto.auth;
 
 import com.oauth2.entities.Permission;
 
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PermissionsDTO {
+public class AuthPermissionsDTO {
 
 	private String name;
 	
-	public PermissionsDTO(Permission permission) {
+	public AuthPermissionsDTO(Permission permission) {
 		this.name = permission.getName();
 	}
 	

@@ -15,7 +15,7 @@ import com.google.common.base.Splitter;
 import com.oauth2.entities.Permission;
 import com.oauth2.entities.Role;
 import com.oauth2.entities.User;
-import com.oauth2.services.impl.UserService;
+import com.oauth2.services.IUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomPermissionEvaluator implements PermissionEvaluator {
 
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	
 	//OR -> @PreAuthorize("hasPermission(returnObject, {'user_create', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
@@ -40,10 +40,10 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
 			//Valid
 			if(!permissionsValid.isEmpty()) {
-				log.info("End - Permission Valid for this method");
+				log.info("Permission Valid for this method");
 				return true;
 			}else {
-				log.info("End - Permission Invalid for this method");
+				log.info("Permission Invalid for this method");
 				return false;
 			}
 			
@@ -62,7 +62,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	
 	
 	private List<String> validPermissions(Authentication auth, Object permission) {
-		log.info("Begin - validating user permission to access method");
+		log.info("Begin - validating user permission in method validPermissions in class CustomPermissionEvaluator");
 		
 		UUID uuid_user = UUID.fromString(auth.getPrincipal().toString());
 		
@@ -86,7 +86,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				.filter(p -> permissionsUser.contains(p))
 				.collect(Collectors.toList());
 		
-		log.info("End - validating user permission to access method");
+		log.info("End - validating user permission in method validPermissions in class CustomPermissionEvaluator");
 		return permissionsValid;
 	}
 
