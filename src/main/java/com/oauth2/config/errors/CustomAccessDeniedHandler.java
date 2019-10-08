@@ -37,7 +37,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     		HttpServletResponse httpServletResponse, 
     		AccessDeniedException ex) throws JsonProcessingException, IOException {
     	
-    	ApiError apiError = new ApiError(FORBIDDEN, ex.getMessage(), ex);
+    	ApiError apiError = new ApiError(FORBIDDEN, ex.getMessage(), "Acesso não autorizado, favor contatar o administrador do sistema.");
 
         ServerHttpResponse outputMessage = new ServletServerHttpResponse(httpServletResponse);
         outputMessage.setStatusCode(HttpStatus.FORBIDDEN);

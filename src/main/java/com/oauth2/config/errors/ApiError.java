@@ -21,6 +21,7 @@ class ApiError {
     private LocalDateTime timestamp;
     private String message;
     private String debugMessage;
+    private String customMessage;
 
     
     private ApiError() {
@@ -37,6 +38,13 @@ class ApiError {
         this.status = status;
         this.message = "Unexpected error";
         this.debugMessage = ex.getLocalizedMessage();
+    }
+    
+    ApiError(HttpStatus status, String message, String customMessage) {
+        this();
+        this.status = status;
+        this.message = message;
+        this.customMessage = customMessage;
     }
 
     ApiError(HttpStatus status, String message, Throwable ex) {
