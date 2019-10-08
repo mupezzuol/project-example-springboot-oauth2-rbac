@@ -25,6 +25,5 @@ public class AuthRolesDTO {
 				.map(AuthPermissionsDTO::new)
 				.collect(Collectors.toList()));
 	}
-	
 
 }

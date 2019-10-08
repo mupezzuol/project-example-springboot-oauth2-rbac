@@ -32,7 +32,6 @@ public class Permission {
 	@ManyToMany(mappedBy = "permissions", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Set<Role> roles;
 	
-	
 	@Override
     public int hashCode() {
         if (permissionId != null) {

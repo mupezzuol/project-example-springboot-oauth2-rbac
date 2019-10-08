@@ -24,10 +24,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
 	@Autowired
 	private IUserService userService;
-
 	
-	//OR -> @PreAuthorize("hasPermission(returnObject, {'user_create', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
-	//AND -> @PreAuthorize("hasPermission(returnObject, {'user_read'}) AND hasPermission(returnObject, {'user_update'})")
 	@Override
 	public boolean hasPermission(Authentication auth, Object targetDomainObject, Object permission) {
 		
@@ -46,20 +43,16 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				log.info("Permission Invalid for this method");
 				return false;
 			}
-			
 		} catch (Exception e) {
 			log.error("Error in method hasPermission in class CustomPermissionEvaluator: " + e.getMessage());
 			return false;
 		}
 	}
 
-	
-	//@PreAuthorize("hasPermission(#id, 'Foo', 'read')")
 	@Override
 	public boolean hasPermission(Authentication auth, Serializable targetId, String targetType, Object permission) {
 		return true;
 	}
-	
 	
 	private List<String> validPermissions(Authentication auth, Object permission) {
 		log.info("Begin - validating user permission in method validPermissions in class CustomPermissionEvaluator");
@@ -91,3 +84,10 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	}
 
 }
+
+/*
+Exemplos:
+OR -> @PreAuthorize("hasPermission(returnObject, {'user_create', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
+AND -> @PreAuthorize("hasPermission(returnObject, {'user_read'}) AND hasPermission(returnObject, {'user_update'})")
+@PreAuthorize("hasPermission(#id, 'Foo', 'read')")
+ */

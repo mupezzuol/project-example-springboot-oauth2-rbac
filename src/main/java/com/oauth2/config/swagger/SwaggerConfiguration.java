@@ -42,7 +42,6 @@ public class SwaggerConfiguration {
 						.apiInfo(apiInfo());
 	}
 	
-	
 	private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
         	.title("Project Example OAuth2 RBAC - API")
@@ -54,13 +53,12 @@ public class SwaggerConfiguration {
             .build();
     }
 	
-	
 	//Method that returns templates that will be hidden in the API documentation
 	@SuppressWarnings("rawtypes")
 	private Class[] disableTemplateClassesModels(){
 		ArrayList<Class> classForDisable = new ArrayList<Class>();
 		
-		//Entities - Models - DTO and others....
+		//Entities - Models - DTO and others...
 		classForDisable.add(User.class);
 		
 		return classForDisable.toArray(new Class[classForDisable.size()]);

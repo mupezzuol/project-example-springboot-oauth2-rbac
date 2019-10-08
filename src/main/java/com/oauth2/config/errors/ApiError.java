@@ -23,7 +23,6 @@ class ApiError {
     private String debugMessage;
     private String customMessage;
 
-    
     private ApiError() {
         this.timestamp = LocalDateTime.now();
     }
@@ -73,4 +72,5 @@ class LowerCaseClassNameResolver extends TypeIdResolverBase {
     public JsonTypeInfo.Id getMechanism() {
         return JsonTypeInfo.Id.CUSTOM;
     }
+    
 }

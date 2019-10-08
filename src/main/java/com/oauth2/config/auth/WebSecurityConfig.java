@@ -23,7 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/**.html",
             "/configuration/**"};
 
-	
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

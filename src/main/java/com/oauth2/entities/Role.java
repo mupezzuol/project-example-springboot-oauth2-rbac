@@ -44,11 +44,9 @@ public class Role implements GrantedAuthority{
 		name = "permission_id", referencedColumnName = "permissionId"))
 	private Set<Permission> permissions;
 	
-	
 	@ManyToMany(mappedBy = "roles")
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<User> users;
-	
 
 	@Override
 	public String getAuthority() {
@@ -57,7 +55,6 @@ public class Role implements GrantedAuthority{
 	        	.collect(Collectors.joining(","));
 	}
 
-	
 	@Override
     public int hashCode() {
         if (roleId != null) {
