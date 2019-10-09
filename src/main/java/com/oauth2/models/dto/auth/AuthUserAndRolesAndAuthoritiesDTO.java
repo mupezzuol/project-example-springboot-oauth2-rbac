@@ -13,13 +13,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AuthUserRoleAndAuthoritiesDTO {
+public class AuthUserAndRolesAndAuthoritiesDTO {
 	
 	private String uuid;
+	private String name;
+	private String email;
 	private List<AuthRolesDTO> roles;
 	
-	public AuthUserRoleAndAuthoritiesDTO(User user) {
+	public AuthUserAndRolesAndAuthoritiesDTO(User user) {
 			this.uuid = user.getUuid().toString();
+			this.name = user.getName();
+			this.email = user.getEmail();
 			this.roles = new ArrayList<>();
 			this.roles.addAll(user.getRoles().stream()
 					.map(AuthRolesDTO::new)

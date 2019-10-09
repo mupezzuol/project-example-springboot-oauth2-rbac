@@ -1,5 +1,7 @@
 package com.oauth2.config.auth;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +12,13 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import com.oauth2.config.auth.token.CustomTokenEnhancer;
 
 @Configuration
 @EnableAuthorizationServer
@@ -37,6 +45,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Value("${jwt.refreshTokenValiditySeconds}")
     private int refreshTokenValiditySeconds;//30days
 
+    
     public OAuthConfiguration(AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserDetailsService userService) {
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
@@ -51,22 +60,36 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .accessTokenValiditySeconds(accessTokenValiditySeconds)
                 .refreshTokenValiditySeconds(refreshTokenValiditySeconds)
                 .authorizedGrantTypes(authorizedGrantTypes)
-                .scopes("read", "write")
-                .resourceIds("api");
+                .scopes("read", "write");
     }
 
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints
-                .accessTokenConverter(accessTokenConverter())
+    	TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhacer(), accessTokenConverter()));
+    	
+    	endpoints
+    			.tokenStore(tokenStore())
+    			.tokenEnhancer(tokenEnhancerChain)
+    			.reuseRefreshTokens(false)
                 .userDetailsService(userService)
                 .authenticationManager(authenticationManager);
     }
 
     @Bean
     JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        return converter;
+        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+        accessTokenConverter.setSigningKey("maracuja");
+        return accessTokenConverter;
     }
+    
+    @Bean
+	public TokenStore tokenStore(){
+		return new JwtTokenStore(accessTokenConverter());
+	}
+	
+	public TokenEnhancer tokenEnhacer() {
+		return new CustomTokenEnhancer();
+	}
 
 }

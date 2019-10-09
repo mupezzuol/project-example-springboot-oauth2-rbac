@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oauth2.entities.User;
-import com.oauth2.models.dto.auth.AuthUserRoleAndAuthoritiesDTO;
+import com.oauth2.models.dto.auth.AuthUserAndRolesAndAuthoritiesDTO;
 import com.oauth2.services.IUserService;
 
 import io.swagger.annotations.Api;
@@ -30,14 +30,14 @@ public class AuthController {
 	private IUserService userService;
 	
 	@GetMapping(value = "/authorities/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AuthUserRoleAndAuthoritiesDTO> getAuthorities(@PathVariable String uuid){
+	public ResponseEntity<AuthUserAndRolesAndAuthoritiesDTO> getAuthorities(@PathVariable String uuid){
 		try {
 			UUID uuid_user = UUID.fromString(uuid.toString());
 			
 			User user = userService.findByUuid(uuid_user)
 					.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuid_user));
 			
-			return ResponseEntity.ok(new AuthUserRoleAndAuthoritiesDTO(user));
+			return ResponseEntity.ok(new AuthUserAndRolesAndAuthoritiesDTO(user));
 		} catch (IllegalArgumentException ie) {
 			log.error("Error method getAuthorities in class AuthController: "+ie.getMessage());
 			return ResponseEntity.badRequest().build();//400

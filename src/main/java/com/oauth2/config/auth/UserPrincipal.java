@@ -36,10 +36,9 @@ public class UserPrincipal implements UserDetails {
         return user.getPassword();
     }
 
-	//UUID -> User
     @Override
     public String getUsername() {
-        return user.getUuid().toString();
+        return user.getEmail();
     }
 
     @Override
