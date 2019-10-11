@@ -2,7 +2,7 @@
 -- admin: $2a$10$DJr9REpKHS5SknDJxUwVPOXQ6SCI72qt5ki5vvYOa4ln3Hfrh67.u
 -- 1234: $2a$10$Ui91L7As0DQzgHiYwTsmv.BrnF9iBY2N3qPpbf/vR6cDAXUPAlqOK
 
-
+-- docker run --name meu-postgres --network=project-example-springboot-oauth2-rbac_minha-rede -e "POSTGRES_PASSWORD=postgres" -e "POSTGRES_PASSWORD=postgres" -e "POSTGRES_USER=postgres" -e "POSTGRES_DB=db_project_oauth2" -e "PGDATA=/var/lib/postgresql/data/pgdata" -p 5432:5432 -v /Users/murillo/development/docker/volumes/postgres:/var/lib/postgresql/data -d postgres:9.5
 
 -- Selects in order
 select * from tbl_role;

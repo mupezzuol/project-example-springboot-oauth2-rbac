@@ -9,8 +9,63 @@ spring:
     name: project-example-oauth2
         
   datasource:
-    name: DB Develop
+    name: db-dev
     url: jdbc:postgresql://localhost:5432/db_project_oauth2
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    platform: 
+    hikari:
+        connection-timeout: 20000
+        maximum-pool-size: 5
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: false
+        format_sql: true
+        ddl-auto: none 
+        temp.use_jdbc_metadata_defaults: false
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    generate-ddl: true
+    
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+jwt:
+  clientId: ProjectExampleOAuth2Security
+  client-secret: secretProjectExampleOAuth2Security
+  accessTokenValidititySeconds: 43200
+  authorizedGrantTypes: password,refresh_token
+  refreshTokenValiditySeconds: 2592000
+
+server:
+  address: localhost
+  port: 8080
+  servlet:
+    context-path: /api
+
+
+
+
+
+
+# Environment - Container - Docker - docker-compose
+---
+spring:
+  profiles: container
+  application:
+    name: project-example-oauth2
+        
+  datasource:
+    name: db-dev
+    url: jdbc:postgresql://db:5432/db_project_oauth2
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -46,7 +101,7 @@ jwt:
   refreshTokenValiditySeconds: 2592000
 
 server:
-  address: localhost
+  address: springbootapp
   port: 8080
   servlet:
     context-path: /api
@@ -54,58 +109,3 @@ server:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# Environment - Homolog
----
-spring:
-  profiles: homolog
-  application:
-    name: project-example-oauth2
-server:
-  address: 192.168.1.2
-  port: 8080
-
-security:
-  oauth2:
-    client:
-      clientId: ProjectExampleOAuth2Security
-      clientSecret: secretProjectExampleOAuth2Security
-      accessTokenUri: http://localhost:8080/api/oauth/token
-      userAuthorizationUri: http://localhost:8080/api/oauth/authorize
-      scope:
-      - password
- 
- 
-
-
-
-
-
-
-
-# Environment - Production
----
-spring:
-  profiles: prod
-  application:
-    name: project-example-oauth2
-server:
-  address: 192.168.1.3
-  port: 8080
-
-
-
-
-  
-  
