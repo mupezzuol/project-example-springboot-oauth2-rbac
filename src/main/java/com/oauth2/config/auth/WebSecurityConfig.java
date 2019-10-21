@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     
     @Override
- 	public void configure(WebSecurity web) throws Exception {
+ 	public void configure(WebSecurity web) {
  		web.ignoring()
  			.antMatchers(HttpMethod.GET, "/")//Home Test
  			.antMatchers(DOCS_INFRA_API);
