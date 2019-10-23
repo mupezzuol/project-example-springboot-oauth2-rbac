@@ -8,9 +8,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -31,7 +33,14 @@ import lombok.ToString;
 @ToString
 @Data
 @Entity(name = "UserEntity")
-@Table(name = "tbl_user")
+@Table(
+		name = "tbl_user", 
+		indexes =  @Index(
+		        name = "idx_tbl_user_email",
+		        columnList = "email",
+		        unique = true
+		    )
+		)
 public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,9 +66,9 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "tbl_user_roles",
 	joinColumns = @JoinColumn(
-			name = "user_id", referencedColumnName = "userId"), 
+			name = "user_id", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "fk_tbl_user_roles_user")), 
 	inverseJoinColumns = @JoinColumn(
-		name = "role_id", referencedColumnName = "roleId"))
+		name = "role_id", referencedColumnName = "roleId", foreignKey = @ForeignKey(name = "fk_tbl_user_roles_role")))
 	private Set<Role> roles;
 	
 	private LocalDate inclusionDate;

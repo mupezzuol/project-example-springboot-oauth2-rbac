@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -39,9 +40,9 @@ public class Role implements GrantedAuthority{
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	@JoinTable(name = "tbl_role_permissions",
 	joinColumns = @JoinColumn(
-			name = "role_id", referencedColumnName = "roleId"), 
+			name = "role_id", referencedColumnName = "roleId", foreignKey = @ForeignKey(name = "fk_tbl_role_permissions_role")), 
 	inverseJoinColumns = @JoinColumn(
-		name = "permission_id", referencedColumnName = "permissionId"))
+		name = "permission_id", referencedColumnName = "permissionId", foreignKey = @ForeignKey(name = "fk_tbl_role_permissions_permission")))
 	private Set<Permission> permissions;
 	
 	@ManyToMany(mappedBy = "roles")
