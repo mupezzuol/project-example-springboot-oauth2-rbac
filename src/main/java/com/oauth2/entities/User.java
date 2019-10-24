@@ -71,6 +71,7 @@ public class User {
 		name = "role_id", referencedColumnName = "roleId", foreignKey = @ForeignKey(name = "fk_tbl_user_roles_role")))
 	private Set<Role> roles;
 	
+	@Column(name = "inclusion_date")
 	private LocalDate inclusionDate;
 	
 
@@ -84,6 +85,5 @@ public class User {
 		this.roles = roles;
 		this.inclusionDate = inclusionDate;
 	}
-
 	
 }

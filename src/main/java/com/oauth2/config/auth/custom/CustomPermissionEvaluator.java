@@ -32,6 +32,12 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
             return false;
         }
 		
+		System.out.print("AAAAAA: " + auth);
+		System.out.print("AAAAAA: " + auth.getAuthorities());
+		System.out.print("AAAAAA: " + auth.getCredentials());
+		System.out.print("AAAAAA: " + auth.getPrincipal().toString());
+		
+		
 		try {
 			List<String> permissionsValid = validPermissions(auth, permission);
 

@@ -3,6 +3,7 @@ package com.oauth2.entities;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,7 @@ public class Permission {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long permissionId;
 	
+	@Column(name = "name")
 	private String name;
 	
 	@ManyToMany(mappedBy = "permissions", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -39,7 +41,6 @@ public class Permission {
         } else if (name != null) {
             return name.hashCode();
         }
-
         return 0;
     }
 

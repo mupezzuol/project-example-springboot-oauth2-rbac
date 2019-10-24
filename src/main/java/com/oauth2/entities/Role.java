@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -34,6 +35,7 @@ public class Role implements GrantedAuthority{
 	@Id @GeneratedValue
 	private Long roleId;
 	
+	@Column(name = "name")
 	private String name;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -63,7 +65,6 @@ public class Role implements GrantedAuthority{
         } else if (name != null) {
             return name.hashCode();
         }
-
         return 0;
     }
 
@@ -79,7 +80,6 @@ public class Role implements GrantedAuthority{
     public String toString() {
         return name;
     }
-
 
 	public Role(String name) {
 		this.name = name;
