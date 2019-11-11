@@ -31,15 +31,17 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                	.antMatchers("/api/user").authenticated()
-                	.antMatchers("/api/**").authenticated()
-                .anyRequest().authenticated()
-                .and()
-                .exceptionHandling()
-                	.authenticationEntryPoint(customAuthenticationEntryPoint).accessDeniedHandler(new CustomAccessDeniedHandler());
+        	.cors().disable()
+        	.csrf().disable()
+            .authorizeRequests()
+            	.antMatchers(WebSecurityConfig.DOCS_INFRA_API).permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .sessionManagement()
+            	.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .exceptionHandling()
+            	.authenticationEntryPoint(customAuthenticationEntryPoint).accessDeniedHandler(new CustomAccessDeniedHandler());
     }
     
     @Bean
@@ -47,5 +49,4 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         return new BCryptPasswordEncoder();
     }
     
-
 }

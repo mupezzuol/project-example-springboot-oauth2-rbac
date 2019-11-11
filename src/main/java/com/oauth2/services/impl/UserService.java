@@ -14,11 +14,10 @@ import com.oauth2.services.IUserService;
 
 @Service
 public class UserService implements IUserService {
-	
+
 	@Autowired
 	private IUserRepository userRepository;
 
-	
 	@Override
 	public List<User> findAll() {
 		return this.userRepository.findAll();
@@ -29,18 +28,30 @@ public class UserService implements IUserService {
 		this.userRepository.save(user);
 		return user;
 	}
-	
+
 	public User findByName(String userName) {
 		try {
-			return userRepository.findByName(userName).get();
+			Optional<User> user = userRepository.findByName(userName);
+
+			if (user.isPresent()) {
+				return user.get();
+			}
+
+			return null;
 		} catch (NoSuchElementException exception) {
 			return null;
 		}
 	}
-	
+
 	public User findByEmail(String email) {
 		try {
-			return userRepository.findByEmail(email).get();
+			Optional<User> user = userRepository.findByEmail(email);
+
+			if (user.isPresent()) {
+				return user.get();
+			}
+			
+			return null;
 		} catch (NoSuchElementException exception) {
 			return null;
 		}
@@ -49,11 +60,16 @@ public class UserService implements IUserService {
 	@Override
 	public Optional<User> findByUuid(UUID uuid) {
 		try {
-			return userRepository.findByUuid(uuid);
+			Optional<User> user = userRepository.findByUuid(uuid);
+			
+			if (user.isPresent()) {
+				return user;
+			}
+			
+			return Optional.empty();
 		} catch (NoSuchElementException exception) {
-			return null;
+			return Optional.empty();
 		}
 	}
-	
 
 }

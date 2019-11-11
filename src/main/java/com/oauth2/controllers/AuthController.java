@@ -32,27 +32,27 @@ public class AuthController {
 	@GetMapping(value = "/authorities/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AuthUserAndRolesAndAuthoritiesDTO> getAuthorities(@PathVariable String uuid){
 		try {
-			UUID uuid_user = UUID.fromString(uuid.toString());
+			UUID uuidUser = UUID.fromString(uuid);
 			
-			User user = userService.findByUuid(uuid_user)
-					.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuid_user));
+			User user = userService.findByUuid(uuidUser)
+					.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuidUser));
 			
 			return ResponseEntity.ok(new AuthUserAndRolesAndAuthoritiesDTO(user));
 		} catch (IllegalArgumentException ie) {
-			log.error("Error method getAuthorities in class AuthController: "+ie.getMessage());
+			log.error("Error method getAuthorities in class AuthController: ", ie);
 			return ResponseEntity.badRequest().build();//400
 		} 
 		catch (Exception ex) {
-			log.error("Error method getAuthorities in class AuthController: "+ex.getMessage());
+			log.error("Error method getAuthorities in class AuthController: ", ex);
 			return ResponseEntity.badRequest().build();//400
 		}
 	}
 	
-	@PreAuthorize("hasPermission(returnObject, {'user_create', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
-	@DeleteMapping("/test")
+	@PreAuthorize("hasPermission(returnObject, {'p1_teste_delete', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
+	@DeleteMapping("/test/permission")
 	public ResponseEntity<String> testAuthorities(){
-		System.out.print("I'm in the method!");
-		return ResponseEntity.ok(new String("OK -> Permission OK"));
+		log.info("OK -> Permissão Testada");
+		return ResponseEntity.ok("OK -> Permission OK");
 	}
 	
 }

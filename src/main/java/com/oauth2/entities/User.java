@@ -1,5 +1,6 @@
 package com.oauth2.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -41,8 +43,11 @@ import lombok.ToString;
 		        unique = true
 		    )
 		)
-public class User {
+public class User implements Serializable {
 	
+	@Transient
+	private static final long serialVersionUID = 111935761710887746L;
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +31,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_role")
 public class Role implements GrantedAuthority{
 	
-	private static final long serialVersionUID = 1L;
+	@Transient
+	private static final long serialVersionUID = -3668685073592312997L;
 
 	@Id @GeneratedValue
 	private Long roleId;

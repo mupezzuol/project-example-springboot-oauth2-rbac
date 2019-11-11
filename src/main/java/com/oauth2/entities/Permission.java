@@ -1,5 +1,6 @@
 package com.oauth2.entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,8 +25,11 @@ import lombok.ToString;
 @Data
 @Entity(name = "PermissionEntity")
 @Table(name = "tbl_permission")
-public class Permission {
+public class Permission implements Serializable {
 	
+	@Transient
+	private static final long serialVersionUID = 627952684503591931L;
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long permissionId;
 	

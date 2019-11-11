@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private static final String[] DOCS_INFRA_API = {
+	public static final String[] DOCS_INFRA_API = {
             "/swagger-resources/**", 
             "//swagger-resources/configuration/**", 
             "/swagger-ui.html", 
@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
  	public void configure(WebSecurity web) {
  		web.ignoring()
- 			.antMatchers(HttpMethod.GET, "/")//Home Test
+ 			.antMatchers(HttpMethod.GET, "/")//Test
  			.antMatchers(DOCS_INFRA_API);
  	}
 

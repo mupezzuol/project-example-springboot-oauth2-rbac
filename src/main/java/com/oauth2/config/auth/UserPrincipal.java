@@ -1,6 +1,7 @@
 package com.oauth2.config.auth;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,12 +24,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//    	String[] permissions = user.getRoles().stream()
-//                .flatMap(role -> role.getPermissions().stream())
-//                .map(permission -> permission.getName())
-//                .toArray(String[]::new);
-//    	AuthorityUtils.createAuthorityList(permissions);
-        return null;
+    	return Collections.emptyList();
     }
 
 	@Override

@@ -19,7 +19,10 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private final HttpMessageConverter<String> messageConverter;
@@ -33,11 +36,20 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException ex) throws IOException {
-        ApiError apiError = new ApiError(UNAUTHORIZED, ex.getMessage(), ex);
-
-        ServerHttpResponse outputMessage = new ServletServerHttpResponse(httpServletResponse);
-        outputMessage.setStatusCode(HttpStatus.UNAUTHORIZED);
-
-        messageConverter.write(mapper.writeValueAsString(apiError), MediaType.APPLICATION_JSON, outputMessage);
+        
+    	ServerHttpResponse outputMessage = new ServletServerHttpResponse(httpServletResponse);
+    	
+    	try {
+    		ApiError apiError = new ApiError(UNAUTHORIZED, ex.getMessage(), ex);
+    		
+    		outputMessage.setStatusCode(HttpStatus.UNAUTHORIZED);
+    		
+    		messageConverter.write(mapper.writeValueAsString(apiError), MediaType.APPLICATION_JSON, outputMessage);
+			
+		} catch (Exception e) {
+			log.error("Error method commence in class CustomAuthenticationEntryPoint: ", e);
+		} finally {
+			outputMessage.close();
+		}
     }
 }
