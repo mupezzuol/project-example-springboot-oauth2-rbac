@@ -2,6 +2,7 @@ package com.oauth2.config.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,10 +32,12 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-        	.cors().disable()
-        	.csrf().disable()
+    		.csrf().disable()
+    		.cors()
+    		.and()
             .authorizeRequests()
             	.antMatchers(WebSecurityConfig.DOCS_INFRA_API).permitAll()
+            	.antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll()
             .anyRequest().authenticated()
             .and()
             .sessionManagement()

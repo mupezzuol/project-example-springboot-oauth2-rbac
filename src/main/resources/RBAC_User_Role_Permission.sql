@@ -28,15 +28,14 @@ INSERT INTO public.tbl_permission (permission_id, "name") VALUES(6, 'efgh');
 
 
 -- Role + Permission
-INSERT INTO public.tbl_role_permissions (role_id, permission_id) VALUES(1, 1);
-INSERT INTO public.tbl_role_permissions (role_id, permission_id) VALUES(1, 2);
-INSERT INTO public.tbl_role_permissions (role_id, permission_id) VALUES(1, 3);
-INSERT INTO public.tbl_role_permissions (role_id, permission_id) VALUES(1, 4);
-INSERT INTO public.tbl_role_permissions (role_id, permission_id) VALUES(2, 2);
-INSERT INTO public.tbl_role_permissions (role_id, permission_id) values(2, 3);
-INSERT INTO public.tbl_role_permissions (role_id, permission_id) VALUES(3, 5);
-INSERT INTO public.tbl_role_permissions (role_id, permission_id) values(3, 6);
-
+INSERT INTO public.tbl_role_permissions (roles_role_id, permissions_permission_id) VALUES(1, 1);
+INSERT INTO public.tbl_role_permissions (roles_role_id, permissions_permission_id) VALUES(1, 2);
+INSERT INTO public.tbl_role_permissions (roles_role_id, permissions_permission_id) VALUES(1, 3);
+INSERT INTO public.tbl_role_permissions (roles_role_id, permissions_permission_id) VALUES(1, 4);
+INSERT INTO public.tbl_role_permissions (roles_role_id, permissions_permission_id) VALUES(2, 2);
+INSERT INTO public.tbl_role_permissions (roles_role_id, permissions_permission_id) values(2, 3);
+INSERT INTO public.tbl_role_permissions (roles_role_id, permissions_permission_id) VALUES(3, 5);
+INSERT INTO public.tbl_role_permissions (roles_role_id, permissions_permission_id) values(3, 6);
 
 -- User
 INSERT INTO public.tbl_user (user_id, email, inclusion_date, "name", password_user, uuid) 
