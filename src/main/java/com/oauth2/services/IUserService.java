@@ -14,7 +14,7 @@ public interface IUserService {
 
 	public User findByName(String name);
 	
-	public User findByEmail(String email);
+	public User findByLogin(String login);
 	
 	public Optional<User> findByUuid(UUID uuid);
 	

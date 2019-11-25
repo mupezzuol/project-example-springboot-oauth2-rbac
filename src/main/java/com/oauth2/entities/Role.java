@@ -10,10 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -34,7 +36,9 @@ public class Role implements GrantedAuthority{
 	@Transient
 	private static final long serialVersionUID = -3668685073592312997L;
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "tRoleSeq")
+	@SequenceGenerator(name = "tRoleSeq", sequenceName = "tbl_role_seq", allocationSize = 1)
 	private Long roleId;
 	
 	@Column(name = "name")

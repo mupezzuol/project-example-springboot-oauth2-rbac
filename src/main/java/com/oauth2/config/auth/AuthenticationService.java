@@ -19,12 +19,12 @@ public class AuthenticationService implements UserDetailsService{
 	IUserRepository userRepository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String email) {
+	public UserDetails loadUserByUsername(String login) {
 		
 		try {
 			User user = userRepository
-					.findByEmail(email)
-					.orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not founded"));
+					.findByLogin(login)
+					.orElseThrow(() -> new UsernameNotFoundException("User with login " + login + " not founded"));
 			return new UserPrincipal(user);
 			
 		} catch (UsernameNotFoundException e) {

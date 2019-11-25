@@ -43,9 +43,9 @@ public class UserService implements IUserService {
 		}
 	}
 
-	public User findByEmail(String email) {
+	public User findByLogin(String login) {
 		try {
-			Optional<User> user = userRepository.findByEmail(email);
+			Optional<User> user = userRepository.findByLogin(login);
 
 			if (user.isPresent()) {
 				return user.get();
