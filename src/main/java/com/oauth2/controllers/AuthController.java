@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oauth2.entities.User;
@@ -48,11 +49,16 @@ public class AuthController {
 		}
 	}
 	
-	@PreAuthorize("hasPermission(returnObject, {'p1_teste_delete', 'user_update', 'abcd_create', 'abcd_read', 'user_read'})")
+	@PreAuthorize("hasPermission(returnObject, {'roles', 'user_update', 'abcd_create', 'abcd', 'user_read'})")
 	@DeleteMapping("/test/permission")
 	public ResponseEntity<String> testAuthorities(){
-		log.info("OK -> Permissão Testada");
-		return ResponseEntity.ok("OK -> Permission OK");
+		return ResponseEntity.ok("Permission OK");
+	}
+	
+	@GetMapping("/test/login")
+	@ResponseBody
+	public String testOAuth() {
+		return "Login OK";
 	}
 	
 }
