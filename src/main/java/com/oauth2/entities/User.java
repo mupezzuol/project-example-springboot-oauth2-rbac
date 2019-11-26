@@ -90,7 +90,7 @@ public class User implements Serializable {
     private Boolean registerStatus;
 	
 	@ManyToOne
-	@JoinColumn(name="company_id")
+	@JoinColumn(name="company_id", foreignKey = @ForeignKey(name = "fk_tbl_user_company"))
 	private Company company;
 	
 	@Embedded
