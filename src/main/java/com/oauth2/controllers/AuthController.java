@@ -49,7 +49,7 @@ public class AuthController {
 		}
 	}
 	
-	@PreAuthorize("hasPermission(returnObject, {'roles', 'user_update', 'abcd_create', 'abcd', 'user_read'})")
+	@PreAuthorize("hasPermission(returnObject, {'roles', 'user_update', 'TESTE', 'abcd', 'user_read'})")
 	@DeleteMapping("/test/permission")
 	public ResponseEntity<String> testAuthorities(){
 		return ResponseEntity.ok("Permission OK");

@@ -64,6 +64,42 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				.omitEmptyStrings()
 				.splitToList(permission.toString().substring(1, permission.toString().length()-1));
 		
+		List<String> permissionsValid = new ArrayList<>();
+		
+		if (permissionsMethod.get(0).equals("roles")) {
+			permissionsValid = validWithRoles(uuidUser, permissionsMethod);
+		} 
+		
+		if (permissionsMethod.get(0).equals("permissions")) {
+			permissionsValid = validWithPermissions(uuidUser, permissionsMethod);
+		}
+		
+		log.debug("End - validating user permission in method validPermissions in class CustomPermissionEvaluator");
+		return permissionsValid;
+	}
+
+	
+	
+	private List<String> validWithRoles(UUID uuidUser, List<String> rolesMethod) {
+		
+		User user = userService.findByUuid(uuidUser)
+				.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuidUser));
+		
+		List<String> rolesUser = new ArrayList<>();
+		
+		for (Role r : user.getRoles()) {
+			rolesUser.add(r.getName());
+		}
+		
+		List<String> permissionsValid = rolesMethod.stream()
+				.filter(p -> rolesUser.contains(p))
+				.collect(Collectors.toList());
+		return permissionsValid;
+	}
+	
+	
+	private List<String> validWithPermissions(UUID uuidUser, List<String> permissionsMethod) {
+		
 		User user = userService.findByUuid(uuidUser)
 				.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuidUser));
 		
@@ -78,11 +114,9 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		List<String> permissionsValid = permissionsMethod.stream()
 				.filter(p -> permissionsUser.contains(p))
 				.collect(Collectors.toList());
-		
-		log.debug("End - validating user permission in method validPermissions in class CustomPermissionEvaluator");
 		return permissionsValid;
 	}
-
+	
 }
 
 /*
