@@ -19,6 +19,7 @@ import com.oauth2.models.dto.auth.AuthUserAndRolesAndAuthoritiesDTO;
 import com.oauth2.services.IUserService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/auth")
@@ -49,12 +50,14 @@ public class AuthController {
 		}
 	}
 	
+	@ApiOperation(value = "", hidden = true)
 	@PreAuthorize("hasPermission(returnObject, {'roles', 'user_update', 'TESTE', 'abcd', 'user_read'})")
 	@DeleteMapping("/test/permission")
 	public ResponseEntity<String> testAuthorities(){
 		return ResponseEntity.ok("Permission OK");
 	}
 	
+	@ApiOperation(value = "", hidden = true)
 	@GetMapping("/test/login")
 	@ResponseBody
 	public String testOAuth() {
