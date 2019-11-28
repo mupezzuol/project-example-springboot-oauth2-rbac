@@ -37,14 +37,17 @@ public class CorsConfig implements Filter{
     }
     
     public CorsConfig() {
+    	//Constructor
     }
 
     @Override
     public void init(FilterConfig filterConfig)  throws ServletException{
+    	//Override method
     }
 
     @Override
     public void destroy() {
+    	//Override method
     }
 
 }

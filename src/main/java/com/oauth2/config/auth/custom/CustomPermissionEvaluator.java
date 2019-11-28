@@ -26,21 +26,21 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	private IUserService userService;
 	
 	@Override
-	public boolean hasPermission(Authentication auth, Object targetDomainObject, Object permission) {
+	public boolean hasPermission(Authentication auth, Object targetDomainObject, Object authorities) {
 		
-		if ((auth == null) || (permission == null)){
+		if ((auth == null) || (authorities == null)){
             return false;
         }
 		
 		try {
-			List<String> permissionsValid = validPermissions(auth, permission);
+			List<String> authoritiesValid = validAuthorities(auth, authorities);
 
 			//Valid
-			if(!permissionsValid.isEmpty()) {
-				log.trace("Permission Valid for this method");
+			if(!authoritiesValid.isEmpty()) {
+				log.trace("Authorities Valid for this method");
 				return true;
 			}else {
-				log.trace("Permission Invalid for this method");
+				log.trace("Authorities Invalid for this method");
 				return false;
 			}
 		} catch (Exception e) {
@@ -49,61 +49,57 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		}
 	}
 
-	@Override
-	public boolean hasPermission(Authentication auth, Serializable targetId, String targetType, Object permission) {
-		return true;
-	}
 	
-	private List<String> validPermissions(Authentication auth, Object permission) {
+	private List<String> validAuthorities(Authentication auth, Object authorities) {
 		log.debug("Begin - validating user permission in method validPermissions in class CustomPermissionEvaluator");
 		
 		UUID uuidUser = UUID.fromString(auth.getPrincipal().toString());
 		
-		List<String> permissionsMethod = Splitter.on(',')
+		List<String> authoritiesMethod = Splitter.on(',')
 				.trimResults()
 				.omitEmptyStrings()
-				.splitToList(permission.toString().substring(1, permission.toString().length()-1));
+				.splitToList(authorities.toString().substring(1, authorities.toString().length()-1));
 		
-		List<String> permissionsValid = new ArrayList<>();
+		List<String> authoritiesValid = new ArrayList<>();
 		
-		if (permissionsMethod.get(0).equals("roles")) {
-			permissionsValid = validWithRoles(uuidUser, permissionsMethod);
+		if (authoritiesMethod.get(0).equals("roles")) {
+			authoritiesValid = validWithRoles(uuidUser, authoritiesMethod);
 		} 
 		
-		if (permissionsMethod.get(0).equals("permissions")) {
-			permissionsValid = validWithPermissions(uuidUser, permissionsMethod);
+		if (authoritiesMethod.get(0).equals("permissions")) {
+			authoritiesValid = validWithPermissions(uuidUser, authoritiesMethod);
 		}
 		
 		log.debug("End - validating user permission in method validPermissions in class CustomPermissionEvaluator");
-		return permissionsValid;
+		return authoritiesValid;
 	}
 
 	
-	
 	private List<String> validWithRoles(UUID uuidUser, List<String> rolesMethod) {
+		List<String> rolesUser = new ArrayList<>();
+		List<String> rolesValid;
 		
 		User user = userService.findByUuid(uuidUser)
 				.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuidUser));
-		
-		List<String> rolesUser = new ArrayList<>();
 		
 		for (Role r : user.getRoles()) {
 			rolesUser.add(r.getName());
 		}
 		
-		List<String> permissionsValid = rolesMethod.stream()
-				.filter(p -> rolesUser.contains(p))
+		rolesValid = rolesMethod.stream()
+				.filter(rolesUser::contains)
 				.collect(Collectors.toList());
-		return permissionsValid;
+		return rolesValid;
 	}
 	
 	
 	private List<String> validWithPermissions(UUID uuidUser, List<String> permissionsMethod) {
+		List<String> permissionsUser = new ArrayList<>();
+		List<String> permissionsValid;
 		
 		User user = userService.findByUuid(uuidUser)
 				.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuidUser));
 		
-		List<String> permissionsUser = new ArrayList<>();
 		
 		for (Role r : user.getRoles()) {
 			for (Permission p : r.getPermissions()) {
@@ -111,10 +107,16 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 			}
 		}
 		
-		List<String> permissionsValid = permissionsMethod.stream()
-				.filter(p -> permissionsUser.contains(p))
+		permissionsValid = permissionsMethod.stream()
+				.filter(permissionsUser::contains)
 				.collect(Collectors.toList());
 		return permissionsValid;
+	}
+	
+	
+	@Override
+	public boolean hasPermission(Authentication auth, Serializable targetId, String targetType, Object permission) {
+		return true;
 	}
 	
 }

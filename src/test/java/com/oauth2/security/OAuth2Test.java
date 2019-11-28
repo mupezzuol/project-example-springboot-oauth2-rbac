@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.oauth2.utils.OAuth2Utils;
+
 @WebAppConfiguration
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,8 +29,8 @@ public class OAuth2Test {
 	
 	@Test
 	public void loginTest() throws Exception {
-		String responseLogin = OAuth2UtilsTest.getOAuth2Login("test", "1234", mockMvc);
-		String accessToken = OAuth2UtilsTest.getAccessToken(responseLogin);
+		String responseLogin = OAuth2Utils.getOAuth2Login("test", "1234", mockMvc);
+		String accessToken = OAuth2Utils.getAccessToken(responseLogin);
 				
 		MvcResult result = mockMvc
 				.perform(get("/auth/test/login")
@@ -41,9 +43,9 @@ public class OAuth2Test {
 	
 	@Test
 	public void authoritiesTest() throws Exception {
-		String responseLogin = OAuth2UtilsTest.getOAuth2Login("test", "1234", mockMvc);
-		String accessToken = OAuth2UtilsTest.getAccessToken(responseLogin);
-		String user_uuid = OAuth2UtilsTest.getTokenUserUuid(responseLogin);
+		String responseLogin = OAuth2Utils.getOAuth2Login("test", "1234", mockMvc);
+		String accessToken = OAuth2Utils.getAccessToken(responseLogin);
+		String user_uuid = OAuth2Utils.getTokenUserUuid(responseLogin);
 		
 		MvcResult result = mockMvc
 				.perform(get("/auth/authorities/" + user_uuid)
@@ -56,8 +58,8 @@ public class OAuth2Test {
 	
 	@Test
 	public void permissionTest() throws Exception {
-		String responseLogin = OAuth2UtilsTest.getOAuth2Login("test", "1234", mockMvc);
-		String accessToken = OAuth2UtilsTest.getAccessToken(responseLogin);
+		String responseLogin = OAuth2Utils.getOAuth2Login("test", "1234", mockMvc);
+		String accessToken = OAuth2Utils.getAccessToken(responseLogin);
 		
 		MvcResult result = mockMvc
 				.perform(delete("/auth/test/permission")

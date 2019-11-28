@@ -60,7 +60,7 @@ public class Role implements GrantedAuthority{
 	@Override
 	public String getAuthority() {
 		return this.permissions.stream()
-	        	.map( p -> p.getName())
+	        	.map(Permission::getName)
 	        	.collect(Collectors.joining(","));
 	}
 

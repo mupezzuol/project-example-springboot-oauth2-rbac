@@ -1,4 +1,4 @@
-package com.oauth2.security;
+package com.oauth2.utils;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.oauth2.common.util.JacksonJsonParser;
@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-public class OAuth2UtilsTest {
+public class OAuth2Utils {
 	
 	/*
 	 * HttpBasic with Username and Password (client credentials) for Authorization in Header with OAuth2
