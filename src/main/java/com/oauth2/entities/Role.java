@@ -52,7 +52,7 @@ public class Role implements GrantedAuthority{
 	private List<Permission> permissions = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "roles")
-	private List<User> users = new ArrayList<>();;
+	private List<User> users = new ArrayList<>();
 
 	@Override
 	public String getAuthority() {
