@@ -19,7 +19,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
 import org.springframework.security.core.GrantedAuthority;
 
 import lombok.AllArgsConstructor;
@@ -44,8 +43,7 @@ public class Role implements GrantedAuthority{
 	@Column(name = "name")
 	private String name;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "tbl_role_permissions",
 	joinColumns = @JoinColumn(
 			name = "role_id", referencedColumnName = "roleId", foreignKey = @ForeignKey(name = "fk_tbl_role_permissions_role")), 
@@ -54,7 +52,6 @@ public class Role implements GrantedAuthority{
 	private Set<Permission> permissions;
 	
 	@ManyToMany(mappedBy = "roles")
-	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<User> users;
 
 	@Override

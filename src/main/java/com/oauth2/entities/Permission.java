@@ -39,7 +39,7 @@ public class Permission implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
-	@ManyToMany(mappedBy = "permissions", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "permissions", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Role> roles;
 	
 	@Override
