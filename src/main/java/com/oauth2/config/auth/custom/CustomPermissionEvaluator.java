@@ -79,7 +79,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		List<String> rolesUser = new ArrayList<>();
 		List<String> rolesValid;
 		
-		User user = userService.findByUuid(uuidUser)
+		User user = userService.findUserByUuid(uuidUser)
 				.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuidUser));
 		
 		for (Role r : user.getRoles()) {
@@ -97,7 +97,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		List<String> permissionsUser = new ArrayList<>();
 		List<String> permissionsValid;
 		
-		User user = userService.findByUuid(uuidUser)
+		User user = userService.findUserByUuid(uuidUser)
 				.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuidUser));
 		
 		

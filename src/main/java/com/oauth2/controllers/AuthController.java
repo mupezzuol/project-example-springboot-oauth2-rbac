@@ -36,8 +36,8 @@ public class AuthController {
 		try {
 			UUID uuidUser = UUID.fromString(uuid);
 			
-			User user = userService.findByUuid(uuidUser)
-					.orElseThrow(() -> new UsernameNotFoundException("Error -> hasPermission for UUID: " + uuidUser));
+			User user = userService.findUserByUuid(uuidUser)
+					.orElseThrow(() -> new UsernameNotFoundException("Error -> User not found for UUID: " + uuidUser));
 			
 			return ResponseEntity.ok(new AuthUserAndRolesAndAuthoritiesDTO(user));
 		} catch (IllegalArgumentException ie) {

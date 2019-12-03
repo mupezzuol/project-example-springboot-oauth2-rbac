@@ -1,7 +1,8 @@
 package com.oauth2.entities;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,8 +40,8 @@ public class Permission implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
-	@ManyToMany(mappedBy = "permissions", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Role> roles;
+	@ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Role> roles = new ArrayList<>();
 	
 	@Override
     public int hashCode() {

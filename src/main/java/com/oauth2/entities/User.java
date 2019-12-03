@@ -2,7 +2,8 @@ package com.oauth2.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -81,7 +82,7 @@ public class User implements Serializable {
 			name = "user_id", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "fk_tbl_user_roles_user")), 
 	inverseJoinColumns = @JoinColumn(
 		name = "role_id", referencedColumnName = "roleId", foreignKey = @ForeignKey(name = "fk_tbl_user_roles_role")))
-	private Set<Role> roles;
+	private List<Role> roles = new ArrayList<>();
 	
 	@Column(name = "date_inclusion")
 	private LocalDate dateInclusion;
@@ -97,7 +98,7 @@ public class User implements Serializable {
 	private Contact contact;
 
 	//Constructor's
-	public User(UUID uuid, String login, String password, String name, Set<Role> roles, LocalDate dateInclusion) {
+	public User(UUID uuid, String login, String password, String name, List<Role> roles, LocalDate dateInclusion) {
 		super();
 		this.uuid = uuid;
 		this.login = login;

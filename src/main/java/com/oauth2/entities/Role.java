@@ -1,7 +1,7 @@
 package com.oauth2.entities;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -49,10 +49,10 @@ public class Role implements GrantedAuthority{
 			name = "role_id", referencedColumnName = "roleId", foreignKey = @ForeignKey(name = "fk_tbl_role_permissions_role")), 
 	inverseJoinColumns = @JoinColumn(
 		name = "permission_id", referencedColumnName = "permissionId", foreignKey = @ForeignKey(name = "fk_tbl_role_permissions_permission")))
-	private Set<Permission> permissions;
+	private List<Permission> permissions = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "roles")
-	private List<User> users;
+	private List<User> users = new ArrayList<>();;
 
 	@Override
 	public String getAuthority() {
