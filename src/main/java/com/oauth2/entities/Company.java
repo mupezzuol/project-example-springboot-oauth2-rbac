@@ -36,7 +36,7 @@ public class Company implements Serializable {
 	private static final long serialVersionUID = 3941297684663128700L;
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "tCompanySeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tCompanySeq")
     @SequenceGenerator(name = "tCompanySeq", sequenceName = "tbl_company_seq", allocationSize = 1)
     private Long companyId;
 	

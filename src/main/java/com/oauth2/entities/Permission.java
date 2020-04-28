@@ -33,7 +33,7 @@ public class Permission implements Serializable {
 	private static final long serialVersionUID = 627952684503591931L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "tPermissionSeq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tPermissionSeq")
 	@SequenceGenerator(name = "tPermissionSeq", sequenceName = "tbl_permission_seq", allocationSize = 1)
 	private Long permissionId;
 	
