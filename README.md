@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/mupezzuol/project-example-springboot-oauth2-rbac/releases">
-    <img src="https://img.shields.io/github/tag/StylishThemes/GitHub-Dark.svg?label=version&style=flat" alt="Version">
+    <img src="https://img.shields.io/github/v/release/mupezzuol/project-example-springboot-oauth2-rbac" alt="Version">
   </a>
   <a href="https://github.com/mupezzuol/project-example-springboot-oauth2-rbac/stargazers">
     <img src="https://img.shields.io/github/stars/StylishThemes/GitHub-Dark.svg?style=flat" alt="Stars">
