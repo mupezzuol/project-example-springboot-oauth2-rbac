@@ -8,6 +8,9 @@
   <a href="https://github.com/mupezzuol/project-example-springboot-oauth2-rbac/network">
     <img src="https://img.shields.io/github/forks/mupezzuol/project-example-springboot-oauth2-rbac" alt="Forks">
   </a>
+  <a href="https://github.com/mupezzuol/project-example-springboot-oauth2-rbac/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/mupezzuol/project-example-springboot-oauth2-rbac" alt="License">
+  </a>
 </p>
 
 # Warning
