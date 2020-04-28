@@ -3,10 +3,10 @@
     <img src="https://img.shields.io/github/v/release/mupezzuol/project-example-springboot-oauth2-rbac" alt="Version">
   </a>
   <a href="https://github.com/mupezzuol/project-example-springboot-oauth2-rbac/stargazers">
-    <img src="https://img.shields.io/github/stars/StylishThemes/GitHub-Dark.svg?style=flat" alt="Stars">
+    <img src="https://img.shields.io/github/stars/mupezzuol/project-example-springboot-oauth2-rbac" alt="Stars">
   </a>
   <a href="https://github.com/mupezzuol/project-example-springboot-oauth2-rbac/network">
-    <img src="https://img.shields.io/github/forks/StylishThemes/GitHub-Dark.svg?style=flat" alt="Forks">
+    <img src="https://img.shields.io/github/forks/mupezzuol/project-example-springboot-oauth2-rbac" alt="Forks">
   </a>
 </p>
 
