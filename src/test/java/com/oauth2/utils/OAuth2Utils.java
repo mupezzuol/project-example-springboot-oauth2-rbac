@@ -46,8 +46,4 @@ public class OAuth2Utils {
 		return new JacksonJsonParser().parseMap(response).get("user_uuid").toString();
 	}
 
-	public static String getTokenUserCompany(String response) throws Exception {
-		return new JacksonJsonParser().parseMap(response).get("user_company").toString();
-	}
-
 }

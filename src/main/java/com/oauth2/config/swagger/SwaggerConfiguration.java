@@ -47,7 +47,7 @@ public class SwaggerConfiguration {
         	.title("Project Example OAuth2 RBAC - API")
             .description("This is a project base with OAuth2.")
             .contact(new Contact("Project Base", "www.project.com", "project@hotmail.com"))
-            .license("License vetweb-api 1.0")
+            .license("License oauth2-api 1.0")
             .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
             .version("1.0.0")
             .build();

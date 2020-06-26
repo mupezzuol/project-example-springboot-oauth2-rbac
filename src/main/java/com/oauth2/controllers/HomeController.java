@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 
 @RequestMapping("/")
-@Api(tags = "Home", description = "Serviço de teste da API")
+@Api(tags = "Home", description = "This is about Home Test")
 @RestController
 public class HomeController {
 
