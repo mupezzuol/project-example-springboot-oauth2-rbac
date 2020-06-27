@@ -41,7 +41,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 		
 		try {
 			ApiError apiError = new ApiError(FORBIDDEN, ex.getMessage(),
-					"Acesso não autorizado, favor contatar o administrador do sistema.");
+					"Unauthorized access, please contact your system administrator.");
 			
 			outputMessage.setStatusCode(HttpStatus.FORBIDDEN);
 			

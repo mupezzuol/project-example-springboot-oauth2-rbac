@@ -51,7 +51,7 @@ public class AuthController {
 	}
 	
 	@ApiOperation(value = "", hidden = true)
-	@PreAuthorize("hasPermission(returnObject, {'permissions', 'user_update', 'TESTE', 'abcd', 'user_read'})")
+	@PreAuthorize("hasPermission(returnObject, {'permissions', 'xxx', 'TESTE', 'xx', 'yyy'})")
 	@DeleteMapping("/test/permission")
 	public ResponseEntity<String> testAuthorities(){
 		return ResponseEntity.ok("Permission OK");
