@@ -1,32 +1,35 @@
-version: "3.7"
+version: "3.8"
 
 services:
 
   db:
-    image: postgres:9.5
-    container_name: meu-postgres
+    image: postgres:12.3-alpine
+    container_name: my-postgres-oauth2
     volumes:
-      - /Users/murillo/development/docker/volumes/postgres:/var/lib/postgresql/data
+      - ./docker/postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks: 
-      - "minha-rede"
+      - "project-oauth"
     environment:
          - POSTGRES_PASSWORD=postgres
          - POSTGRES_USER=postgres
          - POSTGRES_DB=db_project_oauth2
          - PGDATA=/var/lib/postgresql/data/pgdata
-         
-  springbootapp:
+
+  app:
     image: mupezzuol/springboot-oauth2-rbac
-    container_name: meu-springbootapp
+    container_name: my-app-oauth2
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
       - "8080:8080"
     networks: 
-      - "minha-rede"
+      - "project-oauth"
     depends_on:
       - db
 
 networks: 
-  minha-rede:
+  project-oauth:
     driver: bridge

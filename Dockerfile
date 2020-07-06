@@ -1,7 +1,9 @@
 FROM openjdk:8-jdk-alpine
-MAINTAINER "Murillo Pezzuol"
-VOLUME /tmp
-ARG JAR_FILE
-ADD ${JAR_FILE} app.jar
+LABEL maintainer="Murillo Pezzuol"
+ENV APP_FILE project-example-springboot-oauth2-rbac-2.0.0.jar
+ENV APP_HOME /usr/apps
 EXPOSE 8080
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=container","-jar","/app.jar"]
+COPY target/$APP_FILE $APP_HOME/
+WORKDIR $APP_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["exec java -jar $APP_FILE"]

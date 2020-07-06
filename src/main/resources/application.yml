@@ -1,3 +1,20 @@
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+jwt:
+  clientId: ProjectExampleOAuth2Security
+  client-secret: secretProjectExampleOAuth2Security
+  accessTokenValidititySeconds: 43200
+  authorizedGrantTypes: password,refresh_token
+  refreshTokenValiditySeconds: 2592000
+
+
 server:
   address: localhost
   port: 8080
@@ -33,21 +50,35 @@ spring:
         format_sql: true
         ddl-auto: none 
         temp.use_jdbc_metadata_defaults: false
-        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        database-platform: org.hibernate.dialect.PostgreSQL95Dialect
     generate-ddl: true
 
-management:
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: "*"
 
-jwt:
-  clientId: ProjectExampleOAuth2Security
-  client-secret: secretProjectExampleOAuth2Security
-  accessTokenValidititySeconds: 43200
-  authorizedGrantTypes: password,refresh_token
-  refreshTokenValiditySeconds: 2592000
+
+# Environment - Docker
+---
+spring:
+  profiles: docker
+  application:
+    name: project-example-oauth2
+        
+  datasource:
+    name: db-dev
+    url: jdbc:postgresql://db:5432/db_project_oauth2
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    platform: 
+    hikari:
+        connection-timeout: 20000
+        maximum-pool-size: 5
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: false
+        format_sql: true
+        ddl-auto: none 
+        temp.use_jdbc_metadata_defaults: false
+        database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    generate-ddl: true
