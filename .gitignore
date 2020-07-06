@@ -4,6 +4,9 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+docker/
+.mvn/wrapper
+
 ### STS ###
 .apt_generated
 .classpath
