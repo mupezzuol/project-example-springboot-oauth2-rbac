@@ -16,11 +16,12 @@ jwt:
 
 
 server:
-  address: localhost
   port: 8080
   servlet:
     context-path: /api
 spring:
+  application:
+    name: project-example-oauth2
   profiles:
     active: dev
 
@@ -29,9 +30,6 @@ spring:
 ---
 spring:
   profiles: dev
-  application:
-    name: project-example-oauth2
-        
   datasource:
     name: db-dev
     url: jdbc:postgresql://localhost:5432/db_project_oauth2
@@ -59,11 +57,8 @@ spring:
 ---
 spring:
   profiles: docker
-  application:
-    name: project-example-oauth2
-        
   datasource:
-    name: db-dev
+    name: db-docker
     url: jdbc:postgresql://db:5432/db_project_oauth2
     username: postgres
     password: postgres
