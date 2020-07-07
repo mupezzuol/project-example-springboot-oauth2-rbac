@@ -90,7 +90,7 @@ public class User implements Serializable {
 	@Column(name = "register_status")
     private Boolean registerStatus;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="company_id", foreignKey = @ForeignKey(name = "fk_tbl_user_company"))
 	private Company company;
 	
